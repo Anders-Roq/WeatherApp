@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 fun MapPage(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxSize()
-            .background(Color.Red)
+            .background(Color.Cyan)
             .wrapContentSize(Alignment.Center)
     ) {
         Text(
