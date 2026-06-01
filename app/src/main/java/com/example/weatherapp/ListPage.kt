@@ -35,9 +35,6 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.platform.LocalContext
 
 
-private fun getCities() = List(20) { i ->
-    City(name = "Cidade $i", weather = "Carregando clima...")
-}
 
 @Composable
 fun CityItem(
@@ -70,9 +67,9 @@ fun CityItem(
 }
 
 @Composable
-fun ListPage(modifier: Modifier = Modifier) {
+fun ListPage(modifier: Modifier = Modifier, viewModel: MainViewModel) {
 
-    val cityList = remember { getCities().toMutableStateList() }
+    val cityList = viewModel.cities
     val context = LocalContext.current
     LazyColumn(
         modifier = modifier
@@ -81,7 +78,7 @@ fun ListPage(modifier: Modifier = Modifier) {
     ) {
         items(cityList, key = { it.name }) { city ->
             CityItem(city = city, onClose = {
-               Toast.makeText(context, "Removido: ${city.name}", Toast.LENGTH_SHORT).show()
+                viewModel.remove(city)
             }, onClick = {
                 Toast.makeText(context, "Selecionado: ${city.name}", Toast.LENGTH_SHORT).show()
             })
