@@ -121,7 +121,7 @@ fun RegisterPage(modifier: Modifier = Modifier) {
                     Toast.makeText(activity, "Registro realizado com sucesso!", Toast.LENGTH_LONG).show()
                     activity.finish()
                 },
-                enabled = isFormValid  // Passo 6
+                enabled = isFormValid
             ) {
                 Text("Registrar")
             }

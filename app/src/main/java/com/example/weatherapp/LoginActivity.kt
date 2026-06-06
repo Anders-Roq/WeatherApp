@@ -88,20 +88,15 @@ fun LoginPage(modifier: Modifier = Modifier) {
 
             }
             Button(
-                onClick = { email = ""; password = "" },
+                onClick = { activity.startActivity(
+                    Intent(activity, RegisterActivity::class.java).setFlags(
+                        FLAG_ACTIVITY_SINGLE_TOP
+                    )
+                )},
             ) {
-                Text("Limpar")
+                Text("Cadastro")
             }
         }
     }
 }
 
-class LocalActivity {
-    companion object {
-        val current: Activity
-            get() {
-                TODO()
-            }
-    }
-
-}
