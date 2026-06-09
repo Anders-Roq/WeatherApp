@@ -23,9 +23,7 @@ class MainViewModel : ViewModel() {
         _cities.remove(city)
     }
 
-    fun add(name: String) {
         fun add(name: String, location: LatLng? = null) {
             _cities.add(City(name = name, location = location))
         }
     }
-}
