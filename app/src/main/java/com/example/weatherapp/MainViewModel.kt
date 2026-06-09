@@ -7,7 +7,7 @@ import com.google.android.gms.maps.model.LatLng
 
 class MainViewModel : ViewModel() {
 
-    private fun createInitialCities() = List(20) { i ->
+    private fun createInitialCities() = List(5) { i ->
         City(
             name = "Cidade $i",
             weather = "Carregando clima..."
