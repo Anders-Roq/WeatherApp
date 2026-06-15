@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapProperties
@@ -23,7 +24,14 @@ import com.google.maps.android.compose.rememberCameraPositionState
 @Composable
 fun MapPage(modifier: Modifier = Modifier, viewModel: MainViewModel) {
 
-    val camPosState = rememberCameraPositionState ()
+    val camPosState = rememberCameraPositionState()
+
+//    val camPosState = rememberCameraPositionState {
+//        position = CameraPosition.fromLatLngZoom(
+//            LatLng(-8.05, -34.90), // Recife
+//            10f
+//        )
+//    }
 
     val recife = remember { MarkerState(LatLng(-8.05, -34.9)) }
     val caruaru = remember { MarkerState( LatLng(-8.27, -35.98)) }

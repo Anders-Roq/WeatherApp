@@ -53,7 +53,7 @@ fun RegisterPage(modifier: Modifier = Modifier) {
 
     Column(
         modifier = modifier
-            .padding(24.dp)
+            .padding(20.dp)
             .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally

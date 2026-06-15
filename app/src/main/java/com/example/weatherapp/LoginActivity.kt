@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,6 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -52,7 +54,10 @@ fun LoginPage(modifier: Modifier = Modifier) {
     val fieldModifier = modifier.fillMaxWidth(fraction = 0.9f)
 
     Column(
-        modifier = modifier.padding(24.dp).fillMaxSize()
+        modifier = modifier.padding(24.dp).fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        //horizontalAlignment = CenterHorizontally
+
     ) {
         Text(
             text = "Bem-vindo/a!",
@@ -67,7 +72,7 @@ fun LoginPage(modifier: Modifier = Modifier) {
         OutlinedTextField(
             value = password,
             label = { Text(text = "Digite sua senha") },
-            modifier = modifier,
+            modifier = fieldModifier,
             onValueChange = { password = it },
             visualTransformation = PasswordVisualTransformation()
         )
