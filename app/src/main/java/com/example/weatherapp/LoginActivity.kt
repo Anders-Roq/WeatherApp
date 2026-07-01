@@ -23,7 +23,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -84,11 +83,6 @@ fun LoginPage(modifier: Modifier = Modifier) {
                 Firebase.auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(activity) { task ->
                         if (task.isSuccessful) {
-                            activity.startActivity(
-                                Intent(activity, MainActivity::class.java).setFlags(
-                                    FLAG_ACTIVITY_SINGLE_TOP
-                                )
-                            )
                             Toast.makeText(activity, "Login OK!", Toast.LENGTH_LONG).show()
                         } else {
                             Toast.makeText(activity, "Login FALHOU!", Toast.LENGTH_LONG).show()
