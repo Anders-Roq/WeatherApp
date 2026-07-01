@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
     implementation(libs.transportation.consumer)
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
