@@ -55,7 +55,7 @@ fun LoginPage(modifier: Modifier = Modifier) {
     val fieldModifier = modifier.fillMaxWidth(fraction = 0.9f)
 
     Column(
-        modifier = modifier.padding(24.dp).fillMaxSize(),
+        modifier = modifier.padding(12.dp).fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         //horizontalAlignment = CenterHorizontally
 

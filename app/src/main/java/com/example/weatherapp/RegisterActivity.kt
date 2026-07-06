@@ -58,14 +58,14 @@ fun RegisterPage(modifier: Modifier = Modifier) {
 
     Column(
         modifier = modifier
-            .padding(20.dp)
+            .padding(10.dp)
             .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Criar Conta", fontSize = 24.sp)
 
-        Spacer(modifier = Modifier.size(16.dp))
+        Spacer(modifier = Modifier.size(8.dp))
 
 
         OutlinedTextField(
