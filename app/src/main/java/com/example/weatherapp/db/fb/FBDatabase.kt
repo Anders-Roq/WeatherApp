@@ -54,7 +54,7 @@ class FBDatabase {
         if (auth.currentUser == null)
         throw RuntimeException("User not logged in!")
         val uid = auth.currentUser!!.uid
-        db.collection("users").document(uid + "").set(user);
+        db.collection("users").document(uid + "").set(user)
     }
     fun add(city: FBCity) {
         if (auth.currentUser == null)
