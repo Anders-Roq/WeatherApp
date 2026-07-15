@@ -17,6 +17,7 @@ import com.example.weatherapp.model.User
 import com.google.android.gms.maps.model.LatLng
 import kotlin.let
 import com.example.weatherapp.model.Weather
+import com.example.weatherapp.ui.nav.Route
 
 class MainViewModel (private val db: FBDatabase,
                      private val service : WeatherService
@@ -39,6 +40,11 @@ class MainViewModel (private val db: FBDatabase,
     var city: String?
         get() = _city.value
         set(tmp) { _city.value = tmp }
+
+    private var _page = mutableStateOf<Route>(Route.Home)
+    var page: Route
+        get() = _page.value
+        set(tmp) { _page.value = tmp }
 
     init {
         db.setListener(this)

@@ -1,6 +1,5 @@
 package com.example.weatherapp
 
-import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,9 +21,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.items
-import androidx.compose.ui.platform.LocalContext
 import com.example.weatherapp.model.City
 import com.example.weatherapp.model.Weather
+import com.example.weatherapp.ui.nav.Route
 
 
 @Composable
@@ -63,7 +62,7 @@ fun CityItem(
 fun ListPage(modifier: Modifier = Modifier, viewModel: MainViewModel) {
 
     val cityList = viewModel.cities
-    val context = LocalContext.current
+    //val context = LocalContext.current
 
     LazyColumn(
         modifier = modifier
@@ -72,7 +71,7 @@ fun ListPage(modifier: Modifier = Modifier, viewModel: MainViewModel) {
     ) {
         items(items = cityList, key = { it.name } ) { city ->
             CityItem(city = city, weather = viewModel.weather(city.name),{viewModel.city = city.name
-        },
+                viewModel.page = Route.Home },
                 onClose = {
                 viewModel.remove(city)
             })
