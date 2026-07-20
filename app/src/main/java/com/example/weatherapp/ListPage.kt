@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -48,10 +47,10 @@ fun CityItem(
             error = painterResource(id = R.drawable.loading),
             contentDescription = "Imagem"
         )
-        Icon(
-            Icons.Rounded.FavoriteBorder,
-            contentDescription = ""
-        )
+//        Icon(
+//            Icons.Rounded.FavoriteBorder,
+//            contentDescription = ""
+//        )
         Spacer(modifier = Modifier.size(12.dp))
         Column(modifier = modifier.weight(1f)) {
             Text(modifier = Modifier,

@@ -68,9 +68,9 @@ class MainViewModel (private val db: FBDatabase,
         db.remove(city.toFBCity())
     }
 
-    fun add(name: String, location: LatLng? = null) {
-        db.add(City(name = name, location = location).toFBCity())
-    }
+//    fun add(name: String, location: LatLng? = null) {
+//        db.add(City(name = name, location = location).toFBCity())
+//    }
 
     override fun onUserLoaded(user: FBUser) {
         _user.value = user.toUser()
@@ -131,6 +131,7 @@ class MainViewModel (private val db: FBDatabase,
 class MainViewModelFactory(private val db: FBDatabase, private val service : WeatherService) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
             return MainViewModel(db,service) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")

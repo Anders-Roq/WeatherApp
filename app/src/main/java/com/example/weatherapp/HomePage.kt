@@ -12,10 +12,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -51,9 +47,9 @@ fun HomePage(modifier: Modifier = Modifier,viewModel: MainViewModel) {
                     contentDescription = "Imagem"
                 )
 
-                Icon( imageVector = Icons.Filled.AccountBox,
-                    contentDescription = "Localized description",
-                    modifier = modifier.size(150.dp) )
+//                Icon( imageVector = Icons.Filled.AccountBox,
+//                    contentDescription = "Localized description",
+//                    modifier = modifier.size(150.dp) )
                 Column {
                     Spacer(modifier = modifier.size(12.dp))
                     Text( text = viewModel.city ?: "Selecione uma cidade...",
@@ -100,9 +96,9 @@ fun ForecastItem(
             error = painterResource(id = R.drawable.loading),
             contentDescription = "Imagem"
         )
-        Icon( imageVector = Icons.Filled.LocationOn,
-            contentDescription = "Localized description",
-            modifier = modifier.size(48.dp) )
+//        Icon( imageVector = Icons.Filled.LocationOn,
+//            contentDescription = "Localized description",
+//            modifier = modifier.size(48.dp) )
         Spacer(modifier = modifier.size(16.dp))
         Column {
             Text(modifier = modifier, text = forecast.weather, fontSize = 24.sp)
