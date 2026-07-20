@@ -14,10 +14,9 @@ import com.example.weatherapp.db.fb.toFBCity
 import com.example.weatherapp.model.City
 import com.example.weatherapp.model.Forecast
 import com.example.weatherapp.model.User
-import com.google.android.gms.maps.model.LatLng
-import kotlin.let
 import com.example.weatherapp.model.Weather
 import com.example.weatherapp.ui.nav.Route
+import com.google.android.gms.maps.model.LatLng
 
 class MainViewModel (private val db: FBDatabase,
                      private val service : WeatherService
@@ -101,6 +100,15 @@ class MainViewModel (private val db: FBDatabase,
         service.getWeather(name) { apiWeather ->
             apiWeather?.let {
                 _weather[name] = apiWeather.toWeather()
+                loadBitmap(name)
+            }
+        }
+    }
+
+    private fun loadBitmap(name: String) {
+        _weather[name]?.let { weather ->
+            service.getBitmap(weather.imgUrl) { bitmap ->
+                _weather[name] = weather.copy(bitmap = bitmap)
             }
         }
     }
