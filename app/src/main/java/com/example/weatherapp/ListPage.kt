@@ -21,6 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.items
+import androidx.compose.ui.res.painterResource
+import coil.compose.AsyncImage
 import com.example.weatherapp.model.City
 import com.example.weatherapp.model.Weather
 import com.example.weatherapp.ui.nav.Route
@@ -36,9 +38,16 @@ fun CityItem(
 ) {
     val desc = if (weather == Weather.LOADING) "Carregando clima..." else weather.desc
     Row(
+
         modifier = modifier.fillMaxWidth().padding(8.dp).clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
+        AsyncImage(
+            model = weather.imgUrl,
+            modifier = modifier.size(75.dp),
+            error = painterResource(id = R.drawable.loading),
+            contentDescription = "Imagem"
+        )
         Icon(
             Icons.Rounded.FavoriteBorder,
             contentDescription = ""
