@@ -15,12 +15,14 @@ import com.example.weatherapp.model.City
 import com.example.weatherapp.model.Forecast
 import com.example.weatherapp.model.User
 import com.example.weatherapp.model.Weather
+import com.example.weatherapp.monitor.ForecastMonitor
 import com.example.weatherapp.ui.nav.Route
 import com.google.android.gms.maps.model.LatLng
 
 class MainViewModel (private val db: FBDatabase,
-                     private val service : WeatherService
-): ViewModel(), FBDatabase.Listener {
+                     private val service : WeatherService,
+                     private val monitor : ForecastMonitor
+                    ): ViewModel(), FBDatabase.Listener {
 
     private val _cities = mutableStateMapOf<String, City>()
 
@@ -83,18 +85,23 @@ class MainViewModel (private val db: FBDatabase,
     }
 
     override fun onUserSignOut() {
-
+        monitor.cancelAll()
     }
 
     override fun onCityAdded(city: FBCity) {
-        _cities[city.name!!] = city.toCity()
+        val newCity = city.toCity()
+        _cities[city.name!!] = newCity
+        monitor.updateCity(newCity)
     }
     override fun onCityUpdated(city: FBCity) {
+        val newCity = city.toCity()
         _cities.remove(city.name)
-        _cities[city.name!!] = city.toCity()
+        _cities[city.name!!] = newCity
+        monitor.updateCity(newCity)
     }
     override fun onCityRemoved(city: FBCity) {
         _cities.remove(city.name)
+        monitor.cancelCity(city.toCity())
     }
 
     fun weather (name: String) = _weather.getOrPut(name) {
@@ -134,11 +141,14 @@ class MainViewModel (private val db: FBDatabase,
 
 }
 
-class MainViewModelFactory(private val db: FBDatabase, private val service : WeatherService) : ViewModelProvider.Factory {
+class MainViewModelFactory(
+    private val db: FBDatabase,
+    private val service : WeatherService,
+    private val monitor : ForecastMonitor) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return MainViewModel(db,service) as T
+            return MainViewModel(db,service,monitor) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
