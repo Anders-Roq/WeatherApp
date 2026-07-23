@@ -12,6 +12,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.outlined.Notifications
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,41 +42,49 @@ fun HomePage(modifier: Modifier = Modifier,viewModel: MainViewModel) {
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     textAlign = TextAlign.Center, fontSize = 28.sp )
             }
-        } else {
-            Row {
-                AsyncImage(
-                    model = viewModel.weather(viewModel.city!!).imgUrl,
-                    modifier = modifier.size(140.dp),
-                    error = painterResource(id = R.drawable.loading),
-                    contentDescription = "Imagem"
-                )
+        }
+        else {
+        val city = viewModel.cities.find { it.name == viewModel.city }
+        val icon = if (city?.isMonitored == true)
+            Icons.Filled.Notifications else Icons.Outlined.Notifications
 
-//                Icon( imageVector = Icons.Filled.AccountBox,
-//                    contentDescription = "Localized description",
-//                    modifier = modifier.size(150.dp) )
-                Column {
-                    Spacer(modifier = modifier.size(12.dp))
+        Row {
+            AsyncImage(
+                model = viewModel.weather(viewModel.city!!).imgUrl,
+                modifier = modifier.size(140.dp),
+                error = painterResource(id = R.drawable.loading),
+                contentDescription = "Imagem"
+            )
+            Column {
+                Spacer(modifier = modifier.size(12.dp))
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Text( text = viewModel.city ?: "Selecione uma cidade...",
                         fontSize = 28.sp )
-                    viewModel.city?.let { name ->
-                        val weather = viewModel.weather(name)
-                        Spacer(modifier = modifier.size(12.dp))
-                        Text( text = weather.desc ?: "...",
-                            fontSize = 22.sp )
-                        Spacer(modifier = modifier.size(12.dp))
-                        Text( text = "Temp: " + weather.temp + "℃",
-                            fontSize = 22.sp )
-                    }
+                    Icon( imageVector = icon, contentDescription = "Monitorada?",
+                        modifier = Modifier.size(32.dp).clickable {
+                            viewModel.update(city = city!!.copy(isMonitored = !city.isMonitored))
+                        }
+                    )
                 }
-            }
-            viewModel.forecast(viewModel.city!!)?.let { forecasts ->
-                LazyColumn {
-                    items(items = forecasts) { forecast ->
-                        ForecastItem(forecast, onClick = { })
-                    }
+                viewModel.city?.let { name ->
+                    val weather = viewModel.weather(name)
+                    Spacer(modifier = modifier.size(12.dp))
+                    Text( text = weather.desc ?: "...", fontSize = 22.sp )
+                    Spacer(modifier = modifier.size(12.dp))
+                    Text( text = "Temp: " + weather.temp + "℃", fontSize = 22.sp )
                 }
             }
         }
+        viewModel.forecast(viewModel.city!!)?.let { forecasts ->
+            LazyColumn {
+                items(items = forecasts) { forecast ->
+                    ForecastItem(forecast, onClick = { })
+                }
+            }
+        }
+    }
+
+
     }
 }
 

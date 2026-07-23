@@ -20,6 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.ui.res.painterResource
 import coil.compose.AsyncImage
 import com.example.weatherapp.model.City
@@ -52,13 +54,18 @@ fun CityItem(
 //            contentDescription = ""
 //        )
         Spacer(modifier = Modifier.size(12.dp))
+
         Column(modifier = modifier.weight(1f)) {
-            Text(modifier = Modifier,
-                text = city.name,
-                fontSize = 24.sp)
-            Text(modifier = Modifier,
-                text = desc,
-                fontSize = 16.sp)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(modifier = Modifier, text = city.name, fontSize = 24.sp)
+                Icon(
+                    imageVector = if (city.isMonitored) Icons.Filled.Notifications
+                    else Icons.Outlined.Notifications,
+                    contentDescription = "Monitorada?",
+                    modifier = Modifier.size(20.dp)   // sem .clickable — só na Home pode clicar
+                )
+            }
+            Text(modifier = Modifier, text = desc, fontSize = 16.sp)
         }
         IconButton(onClick = onClose) {
             Icon(Icons.Filled.Close, contentDescription = "Close")
